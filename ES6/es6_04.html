@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>화살표함수</h1>
+    <ul>
+        <li>function(param) {} 형태를 축약으로 표현</li>
+        <li>함수 이름이 없는 익명함수, 사용시 변수에 담아 사용</li>
+        <li>형식
+            <ul>
+                <li>(param)=>{code};</li>
+                <li>param=>{code};</li>
+                <li>()=>{code};</li>
+                <li>()=>code;</li>
+                <li>()=>({key:value});</li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        const func1 = function(){
+            console.log("익명함수");
+        }
+        func1();
+
+        const func2 = ()=>{
+            console.log("화살표 함수");
+        };
+        func2();
+
+        const func3=function(num){
+            console.log("화살표 함수 : ", num);
+        };
+        func3(3);
+
+        const func4 = (num)=>{
+            console.log("화살표 함수 : ", num);
+        };
+        func4(4);
+
+        const func5 = (num1, num2)=>{
+            console.log("화살표 함수 : ", num1, num2);
+        };
+        func5(1, 2);
+
+        // 변수가 1개 이상일 경우 반드시 () 묶어서 사용
+        const func6 = (num1, num2)=>{
+            console.log("화살표 함수 : ", num1, num2);
+        };
+
+
+    </script>
+</body>
+</html>

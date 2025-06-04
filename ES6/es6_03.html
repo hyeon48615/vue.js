@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6</title>
+</head>
+<body>
+    <h1>Template String</h1>
+    <h2>1. concise method(간결한 메서드)</h2>
+    <script>
+        const id='admin', name='어드민', age=25;
+        console.log(`user info : ${id}, ${name}, ${age}`);
+
+        const userInfo = {
+            id:id, name: name, age: age,
+            info: function(){console.log(`user info : ${id}, ${name}, ${age}`);}
+        };
+        userInfo.info();
+
+        const user = {
+            id, name, age, 
+            info(){console.log(`user info : ${id}, ${name}, ${age}`);}
+        }; // "id":id, "name":name, "age":age
+        user.info();
+
+        //비구조화 할당
+        let {id:userid, name:username, age:userage} = user;
+        console.log(userid, username, userage);
+
+
+        // 구조분해 할당
+        const introduce = {names:'candy', ages:23};
+        // key 이름과 같은 이름으로 변수 선언
+        const {names, ages} = introduce;
+        console.log(names, ages);
+
+        // 다른 이름으로 변수 선언 -> 변수이름 : 키값
+        const {names:myName, ages:myAge} = introduce;
+        console.log(myName, myAge);
+
+        // 배열에서 값을 꺼낼 때 [] 를 사용하여 앞에서부터 순차적으로 꺼내 올 수 있다.
+        const fruits = ['apple', 'mango', 'grape'];
+        const [zero, one, two] = fruits;
+        console.log(zero);
+    </script>
+</body>
+</html>

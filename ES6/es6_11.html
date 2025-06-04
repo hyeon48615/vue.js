@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모듈</title>
+</head>
+<body>
+    <h1>모듈</h1>
+    <ul>
+        <li>독립성을 가진 재사용 가능한 코드블록이다.</li>
+        <li>ES6 부터 사용 가능</li>
+        <li>export 키워드 사용 -> 만드는쪽</li>
+        <li>import 키워드 사용 -> 참조하는쪽</li>
+    </ul>
+
+    <script type="module">
+        // import { title, add, sub } from './es6_11_module1.js';
+        import { title, add, sub } from './es6_11_module2.js';
+        
+        console.log(title);
+        console.log('add(): ' + add(20, 10));
+        console.log('sub(): ' + sub(20, 10));
+    </script>
+</body>
+</html>

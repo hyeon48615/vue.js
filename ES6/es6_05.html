@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript 에서 this</title>
+</head>
+<body>
+    <script>
+    let obj = {result:0};
+    obj.add = function(x, y){this.result = x+y;};
+ 
+    obj.add(3,4);
+    console.log(JSON.stringify(obj));
+   
+    obj.add = function(x,y){this.result=x+y;};
+    let add2 = obj.add;
+    console.log(add2 === obj.add);
+    add2(3,4);
+    console.log(this.result);
+
+    </script>
+
+
+</body>
+</html>

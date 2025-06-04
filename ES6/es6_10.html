@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    <input type="button" value="왼쪽" id="btnLeft" />
+    <button id="btnRight">오른쪽</button>
+    <button id="btnPerson">손님을 태웁니다.</button>
+    <button id="btnGoto">장소로 이동합니다.</button>
+
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            nextYearAge() {
+                return Number(this.age) + 1;
+            }
+        }
+
+        class IntroducePerson extends Person {
+            constructor(name, age, city, hope) {
+                super(name, age);
+                this.city = city;
+                this.hope = hope;
+            }
+
+            introduce() {
+                return `저는 ${this.city} 에 사는 ${this.name} 입니다.\n
+                        내년에 저는 ${super.nextYearAge()} 살이 됩니다.\n
+                        장래희망은 ${this.hope} 입니다.`;
+            }
+        }
+
+        let me = new IntroducePerson('kia', '23', 'seoul', 'Developer');
+        console.log(me.introduce());
+
+        // 1. 자동차 클래스
+        // - 바퀴 : 4개
+        // - 핸들 : 오른쪽(turnRight), 왼쪽(turnLeft)
+        // - 출발 : start
+        // - 정지 : stop
+        // 2. 택시 클래스 extends 자동차
+        // - 손님 n명을 태웁니다. : takePerson(인원수)
+        // - (으)로 갑니다. : goto(메세지)
+
+        class Car {
+            constructor(wheel) {
+                this.wheel = wheel;
+                console.log('바퀴는 ' + wheel + '개 입니다.');
+            }
+
+            turnRight() {
+                return '좌회전 합니다.';
+            }
+            turnLeft() {
+                return '우회전 합니다.';
+            }
+            start() {
+                return '출발 합니다.';
+            }
+            stop() {
+                return '정차 합니다.';
+            }
+        }
+
+        class Taxi extends Car {
+            constructor(wheel) {
+                super(wheel);
+            }
+
+            takePerson(num) {
+                return `손님 ${num}명을 태웁니다.`;
+            }
+            goto(place) {
+                return `${place}(으)로 갑니다.`;
+            }
+        }
+
+        let taxi = new Taxi(4);
+
+        document.getElementById('btnLeft').onclick = function () {
+            alert(taxi.turnLeft());
+        };
+        document.getElementById('btnRight').onclick = function () {
+            alert(taxi.turnRight());
+        };
+        document.getElementById('btnPerson').onclick = function () {
+            let num = prompt("몇 명을 태울까요?");
+            if (num) { alert(taxi.takePerson(num)); }
+        };
+        document.getElementById('btnGoto').onclick = function () {
+            let place = prompt("어디로 갈까요?");
+            if (place) { alert(taxi.goto(place)); }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>module - default</title>
+</head>
+<body>
+    <script type="module">
+        import om, { mul, divi } from './es6_12_module.js';
+
+        console.log("title: " + om.title);
+        console.log("add: " + om.add(20, 10));
+        console.log("sub: " + om.sub(20, 10));
+        console.log("mul: " + mul(20, 10));
+        console.log("divi: " + divi(20, 10));
+    </script>
+</body>
+</html>
