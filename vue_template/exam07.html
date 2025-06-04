@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="amount" />
+        <img v-show="amount < 0" 
+            src="images/04_RM.png" 
+            title="마이너스는 허용되지 않습니다." 
+            alt="error" 
+            style="width: 30px; height: 30px; vertical-align: middle; border: 1px solid red;" />
+
+        <div>
+            <span v-if="amount != ''">내용을 입력하면 보입니다.</span>
+        </div>
+
+        <hr>
+
+        <div>
+            <!--
+                v-if
+                v-else-if
+                v-else
+
+                입력받은 balance 가
+                1. >= 10000000 -- GOLD 등급
+                2. >= 5000000  -- SILVER 등급
+                3. >= 2000000  -- BRONZE 등급
+            -->
+            <input type="number" v-model.num="balance" />
+        </div>
+
+        <div>
+            <span v-if="balance >= 10000000">GOLD 등급</span>
+            <span v-else-if="balance >= 5000000">SILVER 등급</span>
+            <span v-else-if="balance >= 2000000">BRONZE 등급</span>
+            <span v-else>등급없음</span>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref } = Vue;
+        createApp({
+            setup() {
+                const amount = ref(0);
+                const balance = ref(0);
+                return {
+                    amount,
+                    balance,
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

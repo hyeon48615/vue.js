@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #tbl_list {
+            width: 600px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        #tbl_list td,
+        #tbl_list tr {
+            border: 1px solid black;
+            text-align: center;
+        }
+        #tbl_list > thead > tr {
+            color: yellow;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table id="tbl_list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                </tr>
+            </thead>
+            <tbody id="lists">
+                <tr v-for="list in lists" :key="list.no">
+                    <td>{{list.no}}</td>
+                    <td>{{list.name}}</td>
+                    <td>{{list.tel}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="tbl_list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                </tr>
+            </thead>
+            <tbody id="lists">
+                <tr v-for="(list, index) in lists" :key="list.no">
+                    <td>{{index + 1}}</td>
+                    <td>{{list.name}}</td>
+                    <td>{{list.tel}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <select @input="changeRegion">
+            <option disabled selected>지역을 선택하세요.</option>
+            <option v-for="(value, key) in regions" :value="key">{{value}}</option>
+        </select>
+
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref, reactive } = Vue;
+        createApp({
+            setup() {
+                const page_no = ref(1);
+                const page_size = ref(4);
+                const total_count = ref(100);
+                const lists = reactive([
+                    {no: 1011, name: '고길동', tel: '010-1111-1111'},
+                    {no: 1012, name: '둘리', tel: '010-1111-2222'},
+                    {no: 1013, name: '또치', tel: '010-1111-3333'},
+                    {no: 1014, name: '도우너', tel: '010-1111-4444'}
+                ]);
+                const changeRegion = (e) => {
+                    console.log(e.target.value);
+                };
+
+                // A: 'Asia', B: 'America', C: 'Europe', D: 'Africa', E: 'Oceania'
+                const regions = reactive({ A: 'Asia', B: 'America', C: 'Europe', D: 'Africa', E: 'Oceania' }); 
+
+                return {
+                    page_no,
+                    page_size,
+                    total_count,
+                    lists,
+                    regions,
+                    changeRegion,
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

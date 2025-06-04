@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        약관 내용에 동의하십니까?
+        <input type="checkbox" v-model="agree" true-value="Y" false-value="N" /><br>
+        <input type="text" v-model.number="num" /><br>
+
+        <input type="text" v-bind:value="name" @input="changeName" /> <!-- @input => onkeyup, onkeypress, onchange 발생 시 -->
+        <!-- <input type="text" name="name" onchange="changeName()" /> -->
+
+        <hr>
+
+        <span>선택여부 : {{agree}}</span><br>
+        <span>입력한 값 : {{num}}</span><br>
+        <span>입력한 이름 : {{name}}</span>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref } = Vue;
+        createApp({
+            setup() {
+                const agree = ref('N');
+                const num = ref(0);
+                const name = ref('');
+                const changeName = (e) => {
+                    name.value = e.target.value;
+                };
+                return {
+                    agree,
+                    num,
+                    name,
+                    changeName,
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
