@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width:600px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        table td, table tr {
+            border: 1px solid black;
+            text-align: center;
+        }
+        table > thead > tr {
+            color: yellow;
+            background-color: purple;
+        }
+        .devider {
+            height:2px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table id="tbl_list2">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                </tr>
+            </thead>
+            <tbody id="list2">
+                <template v-for="(list, index) in lists" :key="list.no">
+                    <tr>
+                        <td>{{list.no}}</td>
+                        <td>{{list.name}}</td>
+                        <td>{{list.tel}}</td>
+                    </tr>
+                    <tr class="devider" v-if="index % 4 === 3">
+                        <td colspan="3"></td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const {createApp, ref, reactive} = Vue;
+        createApp({
+            setup() {
+
+                const page_no = ref(1);
+                const page_size = ref(4);
+                const total_count = ref(100);
+                const lists = reactive([
+                    {no:1011, name:'둘리', tel:'010-1111-1111'},
+                    {no:1012, name:'도우너', tel:'010-1111-2222'},
+                    {no:1013, name:'마이콜', tel:'010-1111-3333'},
+                    {no:1014, name:'희동이', tel:'010-1111-4444'},
+                    {no:1015, name:'둘리', tel:'010-1111-1111'},
+                    {no:1016, name:'도우너', tel:'010-1111-2222'},
+                    {no:1017, name:'마이콜', tel:'010-1111-3333'},
+                    {no:1018, name:'희동이', tel:'010-1111-4444'},
+                    {no:1019, name:'둘리', tel:'010-1111-1111'},
+                    {no:1020, name:'도우너', tel:'010-1111-2222'},
+                    {no:1021, name:'마이콜', tel:'010-1111-3333'},
+                    {no:1022, name:'희동이', tel:'010-1111-4444'},
+                ]);
+
+                return {
+                    page_no,
+                    page_size,
+                    total_count,
+                    lists,
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
