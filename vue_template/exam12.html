@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <h1>computed 속성</h1>
+
+        1보다 큰 수를 입력하세요 : <input type="text" id="num" v-model="num" />
+        <br />
+        1부터 입력한 수까지의 합 : <span>{{sum}}</span> <br>
+        1부터 입력한 수까지의 합 : <span>{{sum}}</span> <br>
+        1부터 입력한 수까지의 합 : <span>{{sum}}</span> <br>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref, computed} = Vue;
+        createApp({
+            setup() {
+                const num = ref(0);
+                const sum = computed(()=>{
+                    console.log("## num : " + num.value);
+                    const n = parseInt(num.value);
+                    if (Number.isNaN(n)) return 0;
+                    return (n*(n+1))/2;
+                });
+                return {
+                    num,
+                    sum,
+                }
+            }
+        }).mount("#app");
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!--숫자 입력
+        입력받은 숫자를 세자리마다 , 를 찍는 함수를 사용, computed 속성으로 설정
+        -->
+        <input type="text" v-model="amt" />
+        <br>
+        입력받은 금액 : <span>{{amount}} 원</span>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const {createApp, ref, computed} = Vue;
+        const app = createApp({
+            setup(){
+                const amt = ref(1000);
+                const amount = computed({
+                    get(){
+                        const regExp = /\B(?=(\d{3})+(?!\d))/g;
+                        return amt.value.toString().replace(regExp, ',');
+                    },
+                    set(newAmount){
+                        const parsedAmount = parseInt(newAmount.replace(/,/g, ''));
+                        amt.value = Number.isNaN(parsedAmount) ? 0 : parsedAmount;
+                    }
+                });
+
+                return {
+                    amt,
+                    amount
+                }
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>
