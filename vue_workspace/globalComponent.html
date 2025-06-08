@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <button>일반 버튼</button>
+            <global-component></global-component>
+            <my-local-component></my-local-component>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const app = Vue.createApp({
+            name: "App",
+            data() {
+                return {
+                    message: "HI~~~~"
+                }
+            },
+            // 지역 컴포넌트 등록시 사용
+            // 컴포넌트 이름: 옵션객체 값
+            // 다른 컴포넌트의 지역 컴포넌트는 내가 가져다 쓸 수 없다.
+            // 내 하위 컴포넌트로 등록한 것만 가져다 쓸 수 있다.
+            components: {
+                "my-local-component": {
+                    data() {
+
+                    },
+                    methods: {},
+                    computed: {},
+                    watch: {},
+                    // 템플릿이 없으면 화면에 노출되지 않는다.
+                    template: "<div>지역 컴포넌트 영역</di>"
+                }
+            }
+        });
+
+        // 글로벌 컴포넌트 - 글로벌 메뉴처럼 전체 공유할 컴포넌트
+        // 전역 컴포넌트는 Application 인스턴스에 등록
+        // 매개변수 : 컴포넌트 이름, 옵션객체
+        // 컴포넌트 이름 : SPA 에서는 파스칼타입, SPA 이 아닐경우 케밥방식 --> 태그명
+        // root 는 mount 포인트를 지정하고 올리는 형식
+        // root 를 제외한 나머지 컴포넌트는 화면에 보여질 내용을 명시해야 함. --> 반드시 템플릿을 포함해야 함.
+        // app.component("globalComponent", {}) ==> SPA 에서는 일반적인표준, 아닐경우 케밥스타일로 사용
+        app.component("global-component", {
+            data() {
+                return {
+                    msg: "글로벌 컴포넌트 - Hello~"
+                }
+            },
+            computed: {},
+            methods: {},
+            watch: {},
+            template: "<div>전역 컴포넌트 - msg : {{msg}}</div>"
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+</html>

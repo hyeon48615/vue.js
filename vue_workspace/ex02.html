@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <global-component-a v-bind:propsdata="msg"></global-component-a>
+        <global-component-b v-on:relay-toa="msgRelayToA" v-bind:prodsdata="msg"></global-component-b>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const app = Vue.createApp({
+            name: 'App',
+            data() {
+                return { msg: 'App Root 메시지'}
+            },
+            methods: {
+                msgRelayToA(...args){
+                    alert("createApp : component-e : "+ args[0])
+                    this.msg = args[0];
+                },
+            }
+        });
+
+        app.component('global-component-a', {
+            data() {
+                return {}
+            },
+            props: {
+                propsdata: String
+            },
+            template:`
+             <div>
+                <local-component-c></local-component-c>
+                <local-component-d v-bind:propsdata></local-component-d>
+            </div>`,
+            components:{
+                'local-component-c': {
+                    template: '<div>Local Component C</div>'
+                },
+                'local-component-d': {
+                    data() {
+                        return {}
+                    },
+                    props: {
+                        propsdata:String
+                    },
+                    template:`
+                    <div>
+                        <div>Local Component D</div>
+                        <div>E로부터 전달된 데이터 : {{ propsdata }}</div>
+                    </div>
+                    `
+                },
+            }
+        });
+        app.component("global-component-b", {
+            data() {
+                return {}
+            },
+            methods: {},
+            template: `<local-component-e></local-component-e>`,
+            components: {
+                "local-component-e": {
+                    data() {return{}},
+                    methods: {
+                        sendMsg() {
+                            this.$emit('relay-toa', document.getElementById("inputText").value);
+                        }
+                    },
+                    template: `
+                    <div>
+                        <input type="text" id="inputText" />
+                        <button v-on:click="sendMsg">클릭</button>
+                    </div>
+                    `
+                }
+            }
+        });
+        const vm = app.mount("#app");
+    </script>
+</body>
+</html>

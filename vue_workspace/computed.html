@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <span for="num">1보다 큰 수</span>
+        <input type="text" id="num" name="num" v-model="num" />
+        <br><br>
+        1 부터 입력한 숫자까지의 합 : <span>{{sum}}</span><br>
+        1 부터 입력한 숫자까지의 합 : <span>{{sum}}</span><br>
+        1 부터 입력한 숫자까지의 합 : <span>{{sum}}</span><br>
+        <!-- v- : 디렉티브 의미, v-model : 데이터를 양방향으로 동기화 시키는 기능 -->
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const app = Vue.createApp({
+            name: "App",
+            data(){
+                return {
+                    num:0
+                }
+            },
+            // computed 안에 있는 메서드는 명시적으로 호출하지 않는다.
+            // computed 안에서 사용하는 변수가 변하는 순간 해당 함수명과 같은 이믈의 변수가 생성된 후 값이 할당.
+            // {{변수명(함수명)}} 형태로 사용
+            computed: {
+                sum() {
+                    console.log("현재의 num 값 : "+ this.num);
+                    return(parseInt(this.num)*(parseInt(this.num)+1)/2);
+                }
+                // sum: (vm)=>{
+                //     return(parseInt(vm.num)*(parseInt(vm.num)+1)/2);
+                // }
+            }
+        });
+        const vm = app.mount("#app");
+    </script>
+</body>
+</html>

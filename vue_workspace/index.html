@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--
+// 1. Vue application 이 동작할 div 작성
+// 2. CDN 방식으로 vue framework 사용
+// 3. Vue 인스턴스 영역을 생성
+// 3-1. Model(데이터) 생성
+// 3-2. 자바스크립트 객체 생성 -> 객체는 literal 표현 가능
+-->
+
+    <div id="app">
+        <!-- UI -->
+    </div>
+
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        // 1. Model 객체 생성
+        let model = {
+            message: "Hello, VueJS",
+        };
+
+        // 2. Vue 인스턴스 객체 생성
+        //const {createApp, ref} = Vue;
+        //createApp({}).mount("#app");
+        const app = Vue.createApp({
+            //루트 컴포넌트의 Option 데이터 설정 --> 기본적인 항목이 정해져 있다.
+            name: "App",
+            //data: function(){}, // 기본적인 익명함수로 표현
+            data(){
+                // 반드시 객체를 리턴해야 함.
+                // 객체의 property 가 component 의 data 가 됨
+                return model;
+            },
+        });
+        const vm = app.mount("#app");
+        // --> 내부적으로 프록시 생성
+        //       --> 데이터 변경시 UI 변경 적용, 데이터 연동 등으로 사용
+        //       --> 프록시 역할
+        // model 의 데이터를 바꾸면 화면에는 변경 사항이 없지만, 
+        // 루트 컴포넌트의 데이터를 바꾸면 프록시가 감지하여, 화면의 데이터를 변경해 줌
+
+
+    </script>
+
+
+</body>
+</html>

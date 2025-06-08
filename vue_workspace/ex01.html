@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <global-component-a v-bind:propsdata="msg"></global-component-a>
+        <global-component-b v-on:relay-toa="msgRelayToA" v-bind:propsdata="msg"></global-component-b>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    msg: "App Root 메시지"
+                }
+            },
+            methods: {
+                msgRelayToA(...args) {
+                    this.msg = args[0];
+                    alert("createApp : component-b msg : "+ args[0]);
+                }
+            }
+        });
+
+        app.component("global-component-a", {
+            data() {
+                return {
+                    msg: "Global Component A 메시지2"
+                }
+            },
+            props: {
+                propsdata: String
+            },
+            template:`
+            <div>
+                <div>Global Component A</div>
+                <div>{{propsdata}}</div>
+            </div>
+            `
+        });
+        app.component("global-component-b", {
+            data() {
+                return {}
+            },
+            methods: {
+                sendMsg() {
+                    //alert(document.getElementById("inputText").value);
+                    this.$emit('relay-toa', document.getElementById("inputText").value);
+                }
+            },
+            template:`
+            <div>
+                <div>
+                    <input type="text" id="inputText" />
+                    &nbsp;&nbsp;
+                    <button v-on:click="sendMsg">클릭</button>
+                </div>
+            </div>
+            `
+        });
+        const vm = app.mount("#app");
+    </script>
+</body>
+</html>

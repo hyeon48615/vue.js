@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child-component v-on:show-log="printText"></child-component>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const app = Vue.createApp({
+            name: "App",
+            data() {
+                return {
+                    message: "상위 컴포넌트에서 보내는 메시지"
+                }
+            },
+            methods: {
+                printText(...args) {
+                    alert(args[0]);
+                }
+            }
+        });
+
+        //전역 컴포넌트 등록
+        app.component('child-component', {
+            data() {
+                return {}
+            },
+            methods: {
+                showLog() {
+                    alert('child component');
+                    this.$emit('show-log', 100);
+                }
+            },
+            template: '<button v-on:click="showLog">클릭!!!!</button>'
+        });
+
+        const vm = app.mount("#app");
+
+    </script>
+</body>
+</html>

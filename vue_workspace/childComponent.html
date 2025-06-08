@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child-component v-bind:propsdata="message"></child-component>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const app = Vue.createApp({
+            name: "App",
+            data() {
+                return {
+                    message: "부모에서 전달하는 메시지"
+                }
+            }
+        });
+
+        app.component("child-component", {
+            data() {
+                return {}
+            },
+            props: {
+                propsdata: String
+            },
+            template: "<p>Root 로부터 전달된 데이터 : {{ propsdata }}</p>"
+        });
+
+        app.mount("#app");
+
+    </script>
+</body>
+</html>

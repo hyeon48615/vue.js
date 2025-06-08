@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 부모가 자식 컴포넌트에 전달할 데이터는 v-bind 이용, 변수명 파스칼식으로 표현하지 않는다. -->
+        <child-component v-bind:propsdata="message"></child-component>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const app = Vue.createApp({
+            name: "App",
+            data() {
+                return {
+                    message: "Vue 데이터 통신"
+                }
+            }
+        });
+
+        app.component("child-component", {
+            data() {
+                return {
+
+                }
+            },
+            // Root 컴포넌트의 데이터를 받아서 사용
+            // 전달된 데이터를 받기 위한 전용 속성
+            // 전달만 받음 --> 읽기 전용 속성 --> 하위 요소에서 값을 변경할 수 없다. propsdata 만 명시
+            props: {
+                propsdata: String // 자료형은 명시하지 않아도 됨
+            },
+            template: "<p>Root로부터 전달된 데이터 : {{propsdata}}</p>"
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>
