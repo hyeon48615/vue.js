@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- x: <input type="text" v-model="x" /><br>
+        y: <input type="text" v-model="y" /><br> -->
+        x: <input type="text" v-model="values.x" /><br>
+        y: <input type="text" v-model="values.y" /><br>
+        합계 : {{ sum }}
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        Vue.createApp({
+            name: 'App',
+            data() {
+                return {
+                    // x:0,
+                    // y:0,
+                    values: {
+                        x:0,
+                        y:0
+                    },
+                    sum:0
+                }
+            },
+            compute: {},
+            methods: {},
+            watch: {
+                // // 함수명은 data 에서 정의한 변수명 동일하게 작성
+                // x(current, old) {
+                //     this.sum = parseInt(current) + parseInt(this.y)
+                // },
+                // y(current, old) {
+                //     this.sum = parseInt(this.x) + parseInt(current)
+                // }
+                // values(current, old){
+                //     this.sum = parseInt(this.x) + parseInt(this.y)
+                // }
+                values: {
+                    handler: function(current) {
+                        this.sum = parseInt(current.x) + parseInt(current.y)
+                    },
+                    deep: true  // 객체가 가진 속성 값까지 모니터링 하게 설정
+                }
+            },
+        }).mount("#app");
+    </script>
+</body>
+</html>
